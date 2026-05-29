@@ -1,21 +1,39 @@
-<script>
-    const data = {
-        objects: ["Corroded Drone", "Copper-Wire Golem", "Rusted Circuit-Board Altar", "Severed Robotic Limb", "Static-Infused Mask"],
-        actions: ["Infuse with static", "Bind in pine resin", "Whisper into the hard drive", "Anoint with motor oil", "Etch in moonlight"],
-        elements: ["Bioluminescent moss", "Storm-struck oak", "Mercury-tainted stream", "Ancient radioactive silt", "Cracked glacial ice"],
-        signs: ["Sigil of the last circuit", "Elder-rune of silicon", "Void-mark of the grid", "Fractal glyph", "Iron-tooth binding"],
-        atmospheres: ["Echoes of a silent city", "Ash-choked horizon", "Sun-bleached ruin", "Magnetic storm front", "Endless digital twilight"]
-    };
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Esoteric Terminal</title>
+    <style>
+        body { background: #0a0a0a; color: #33ff33; font-family: 'Courier New', monospace; padding: 20px; }
+        #terminal { border: 1px solid #33ff33; padding: 20px; min-height: 200px; }
+        button { background: transparent; color: #33ff33; border: 1px solid #33ff33; padding: 10px; cursor: pointer; margin-top: 20px; }
+        button:hover { background: #33ff33; color: #0a0a0a; }
+    </style>
+</head>
+<body>
 
-    let currentIdea = "";
+    <div id="terminal">
+        <h3>[SYSTEM_READY_INIT]</h3>
+        <p id="output">Click the ritual to manifest an idea...</p>
+        <button onclick="generate()">> SYNTHESIZE RITUAL</button>
+    </div>
 
-    function generate() {
-        const rand = (arr) => arr[Math.floor(Math.random() * arr.length)];
-        currentIdea = `Manifesting: A ${rand(data.objects)} that you must ${rand(data.actions)} using ${rand(data.elements)} marked with the ${rand(data.signs)} amidst the ${rand(data.atmospheres)}.`;
-        document.getElementById('output').innerText = currentIdea;
-    }
+    <script>
+        const data = {
+            objects: ["Corroded Drone", "Copper-Wire Golem", "Rusted Circuit-Board Altar", "Severed Robotic Limb", "Static-Infused Mask"],
+            actions: ["Infuse with static", "Bind in pine resin", "Whisper into the hard drive", "Anoint with motor oil", "Etch in moonlight"],
+            elements: ["Bioluminescent moss", "Storm-struck oak", "Mercury-tainted stream", "Ancient radioactive silt", "Cracked glacial ice"],
+            signs: ["Sigil of the last circuit", "Elder-rune of silicon", "Void-mark of the grid", "Fractal glyph", "Iron-tooth binding"],
+            atmospheres: ["Echoes of a silent city", "Ash-choked horizon", "Sun-bleached ruin", "Magnetic storm front", "Endless digital twilight"]
+        };
 
-    function exportIdea() {
+        function generate() {
+            const rand = (arr) => arr[Math.floor(Math.random() * arr.length)];
+            const output = `Manifesting: A ${rand(data.objects)} that you must ${rand(data.actions)} using ${rand(data.elements)} marked with the ${rand(data.signs)} amidst the ${rand(data.atmospheres)}.`;
+            document.getElementById('output').innerText = output;
+        }
+        function exportIdea() {
         if (!currentIdea) return alert("Generate an idea first, initiate.");
         
         const blob = new Blob([currentIdea], { type: 'text/plain' });
@@ -29,7 +47,6 @@
         document.body.removeChild(a);
         URL.revokeObjectURL(url);
     }
-    <button onclick="exportIdea()">> ARCHIVE TO STORAGE</button>
-</script>
-
-
+    </script>
+</body>
+</html>
